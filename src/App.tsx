@@ -1,0 +1,51 @@
+import React, { useState } from 'react';
+import { Hero } from './components/Hero';
+import { CurrencyRates } from './components/CurrencyRates';
+import { TransferModal } from './components/TransferModal';
+import { PaymentModal } from './components/PaymentModal';
+import { Contract } from './components/Contract';
+import { TransferForm } from './types';
+
+function App() {
+  const [showTransferModal, setShowTransferModal] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [transferData, setTransferData] = useState<TransferForm | null>(null);
+
+  const handleOpenTransfer = () => {
+    setShowTransferModal(true);
+  };
+
+  const handleTransferNext = (data: TransferForm) => {
+    setTransferData(data);
+    setShowTransferModal(false);
+    setShowPaymentModal(true);
+  };
+
+  const handleCloseModals = () => {
+    setShowTransferModal(false);
+    setShowPaymentModal(false);
+    setTransferData(null);
+  };
+
+  return (
+    <div className="min-h-screen bg-white">
+      <Hero onOpenTransfer={handleOpenTransfer} />
+      <CurrencyRates />
+      <Contract />
+
+      <TransferModal
+        isOpen={showTransferModal}
+        onClose={handleCloseModals}
+        onNext={handleTransferNext}
+      />
+
+      <PaymentModal
+        isOpen={showPaymentModal}
+        onClose={handleCloseModals}
+        transferData={transferData}
+      />
+    </div>
+  );
+}
+
+export default App;
