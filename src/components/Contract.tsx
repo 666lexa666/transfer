@@ -69,12 +69,7 @@ export const Contract: React.FC = () => {
           </div>
         </div>
 
-        <div className="text-center mt-8 text-sm text-gray-500">
-          <p>© 2025 MoneyTransfer. Все права защищены.</p>
-          <p className="mt-1">
-            Лицензия ЦБ РФ № 1234-56789 от 01.01.2024
-          </p>
-        </div>
+        
       </div>
     </div>
   );
