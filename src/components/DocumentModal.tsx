@@ -2,6 +2,9 @@ import React from 'react';
 import { X, Download, FileText } from 'lucide-react';
 import jsPDF from 'jspdf';
 
+// Добавляем поддержку кириллицы
+import 'jspdf/dist/jspdf.es.min.js';
+
 interface DocumentModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -18,25 +21,43 @@ export const DocumentModal: React.FC<DocumentModalProps> = ({
   fileName,
 }) => {
   const handleDownload = () => {
-    // Создаем PDF документ
-    const doc = new jsPDF();
+    // Создаем PDF документ с поддержкой UTF-8
+    const doc = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: 'a4'
+    });
     
-    // Настройки для русского текста
-    doc.setFont('helvetica');
+    // Используем встроенный шрифт с поддержкой кириллицы
+    doc.setFont('times', 'normal');
     doc.setFontSize(12);
     
-    // Разбиваем текст на строки для корректного отображения
-    const lines = doc.splitTextToSize(content, 180);
-    
-    // Добавляем текст в PDF
+    // Разбиваем текст на строки и обрабатываем каждую строку отдельно
+    const textLines = content.split('\n');
     let yPosition = 20;
-    lines.forEach((line: string) => {
-      if (yPosition > 280) {
-        doc.addPage();
-        yPosition = 20;
+    const pageHeight = 280;
+    const lineHeight = 7;
+    const maxWidth = 180;
+    
+    textLines.forEach((line: string) => {
+      if (line.trim() === '') {
+        yPosition += lineHeight;
+        return;
       }
-      doc.text(line, 15, yPosition);
-      yPosition += 7;
+      
+      // Разбиваем длинные строки
+      const wrappedLines = doc.splitTextToSize(line, maxWidth);
+      
+      wrappedLines.forEach((wrappedLine: string) => {
+        if (yPosition > pageHeight) {
+          doc.addPage();
+          yPosition = 20;
+        }
+        
+        // Добавляем текст с правильной кодировкой
+        doc.text(wrappedLine, 15, yPosition);
+        yPosition += lineHeight;
+      });
     });
     
     // Скачиваем PDF файл
