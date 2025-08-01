@@ -1,5 +1,6 @@
 import React from 'react';
 import { X, Download, FileText } from 'lucide-react';
+import jsPDF from 'jspdf';
 
 interface DocumentModalProps {
   isOpen: boolean;
@@ -17,14 +18,29 @@ export const DocumentModal: React.FC<DocumentModalProps> = ({
   fileName,
 }) => {
   const handleDownload = () => {
-    // Создаем PDF-подобный контент (в реальном проекте здесь должна быть интеграция с PDF библиотекой)
-    const element = document.createElement('a');
-    const file = new Blob([content], { type: 'text/plain' });
-    element.href = URL.createObjectURL(file);
-    element.download = `${fileName}.txt`;
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
+    // Создаем PDF документ
+    const doc = new jsPDF();
+    
+    // Настройки для русского текста
+    doc.setFont('helvetica');
+    doc.setFontSize(12);
+    
+    // Разбиваем текст на строки для корректного отображения
+    const lines = doc.splitTextToSize(content, 180);
+    
+    // Добавляем текст в PDF
+    let yPosition = 20;
+    lines.forEach((line: string) => {
+      if (yPosition > 280) {
+        doc.addPage();
+        yPosition = 20;
+      }
+      doc.text(line, 15, yPosition);
+      yPosition += 7;
+    });
+    
+    // Скачиваем PDF файл
+    doc.save(`${fileName}.pdf`);
   };
 
   if (!isOpen) return null;
