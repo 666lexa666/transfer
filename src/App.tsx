@@ -5,6 +5,7 @@ import { TransferModal } from './components/TransferModal';
 import { PaymentModal } from './components/PaymentModal';
 import { Contract } from './components/Contract';
 import { TransferForm } from './types';
+import { Footer } from './components/Footer';
 
 function App() {
   const [showTransferModal, setShowTransferModal] = useState(false);
@@ -28,22 +29,26 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      <Hero onOpenTransfer={handleOpenTransfer} />
-      <CurrencyRates />
-      <Contract />
+    <div className="min-h-screen bg-white flex flex-col">
+      <div className="flex-grow">
+        <Hero onOpenTransfer={handleOpenTransfer} />
+        <CurrencyRates />
+        <Contract />
 
-      <TransferModal
-        isOpen={showTransferModal}
-        onClose={handleCloseModals}
-        onNext={handleTransferNext}
-      />
+        <TransferModal
+          isOpen={showTransferModal}
+          onClose={handleCloseModals}
+          onNext={handleTransferNext}
+        />
 
-      <PaymentModal
-        isOpen={showPaymentModal}
-        onClose={handleCloseModals}
-        transferData={transferData}
-      />
+        <PaymentModal
+          isOpen={showPaymentModal}
+          onClose={handleCloseModals}
+          transferData={transferData}
+        />
+      </div>
+      
+      <Footer />
     </div>
   );
 }
