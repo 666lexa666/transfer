@@ -81,6 +81,9 @@ export const Footer: React.FC = () => {
                 </div>
               </div>
             </div>
+            <div className="text-center mt-8 text-sm text-gray-500">
+              <p>© {new Date().getFullYear()} ООО "Максым". Все права защищены.</p>
+            </div>
           </div>
         </div>
       </div>
