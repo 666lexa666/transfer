@@ -3,7 +3,6 @@ import { Hero } from './components/Hero';
 import { CurrencyRates } from './components/CurrencyRates';
 import { TransferModal } from './components/TransferModal';
 import { PaymentModal } from './components/PaymentModal';
-import { Contract } from './components/Contract';
 import { TransferForm } from './types';
 import { Footer } from './components/Footer';
 
@@ -33,7 +32,6 @@ function App() {
       <div className="flex-grow">
         <Hero onOpenTransfer={handleOpenTransfer} />
         <CurrencyRates />
-        <Contract />
 
         <TransferModal
           isOpen={showTransferModal}
