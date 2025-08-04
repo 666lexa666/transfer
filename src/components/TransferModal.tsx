@@ -17,6 +17,9 @@ export const TransferModal: React.FC<TransferModalProps> = ({
   const [formData, setFormData] = useState<TransferForm>({
     country: '',
     recipientName: '',
+    senderName: '',
+    senderPhone: '',
+    senderEmail: '',
     bank: '',
     account: '',
     currency: '',
@@ -32,6 +35,22 @@ export const TransferModal: React.FC<TransferModalProps> = ({
     
     if (!formData.country) newErrors.country = 'Выберите страну';
     if (!formData.recipientName) newErrors.recipientName = 'Введите ФИО получателя';
+    if (!formData.senderName) newErrors.senderName = 'Введите ваше ФИО';
+    if (!formData.senderPhone) newErrors.senderPhone = 'Введите номер телефона';
+    if (!formData.senderEmail) newErrors.senderEmail = 'Введите электронную почту';
+    
+    // Простая валидация email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (formData.senderEmail && !emailRegex.test(formData.senderEmail)) {
+      newErrors.senderEmail = 'Введите корректный email';
+    }
+    
+    // Простая валидация телефона
+    const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
+    if (formData.senderPhone && !phoneRegex.test(formData.senderPhone)) {
+      newErrors.senderPhone = 'Введите корректный номер телефона';
+    }
+    
     if (!formData.bank) newErrors.bank = 'Введите название банка';
     if (!formData.account) newErrors.account = 'Введите номер счёта';
     if (!formData.currency) newErrors.currency = 'Выберите валюту';

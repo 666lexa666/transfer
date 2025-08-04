@@ -1,6 +1,9 @@
 export interface TransferForm {
   country: string;
   recipientName: string;
+  senderName: string;
+  senderPhone: string;
+  senderEmail: string;
   bank: string;
   account: string;
   currency: string;
