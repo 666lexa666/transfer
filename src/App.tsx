@@ -33,7 +33,6 @@ function App() {
       <div className="flex-grow">
         <Hero onOpenTransfer={handleOpenTransfer} />
         <CurrencyRates />
-        <Contract />
 
         <TransferModal
           isOpen={showTransferModal}
