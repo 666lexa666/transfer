@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { X, ArrowRight } from 'lucide-react';
 import { TransferForm } from '../types';
 import { countries, currencies } from '../data/countries';
+import { DocumentModal } from './DocumentModal';
+import { documents } from '../data/documents';
 
 interface TransferModalProps {
   isOpen: boolean;
@@ -27,6 +29,8 @@ export const TransferModal: React.FC<TransferModalProps> = ({
   });
 
   const [errors, setErrors] = useState<Partial<TransferForm>>({});
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const [showDocument, setShowDocument] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,6 +58,12 @@ export const TransferModal: React.FC<TransferModalProps> = ({
     if (!formData.bank) newErrors.bank = 'Введите название банка';
     if (!formData.account) newErrors.account = 'Введите номер счёта';
     if (!formData.currency) newErrors.currency = 'Выберите валюту';
+
+    if (!agreedToTerms) {
+      // Показываем ошибку для чекбокса
+      alert('Необходимо согласиться с договором оферты и политикой конфиденциальности');
+      return;
+    }
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -238,6 +248,36 @@ export const TransferModal: React.FC<TransferModalProps> = ({
             </div>
           </div>
 
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+            <div className="flex items-start gap-3">
+              <input
+                type="checkbox"
+                id="agreement"
+                checked={agreedToTerms}
+                onChange={(e) => setAgreedToTerms(e.target.checked)}
+                className="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <label htmlFor="agreement" className="text-sm text-gray-700">
+                Согласен с{' '}
+                <button
+                  type="button"
+                  onClick={() => setShowDocument('contract')}
+                  className="text-blue-600 hover:text-blue-800 hover:underline"
+                >
+                  договором оферты
+                </button>
+                {' '}и{' '}
+                <button
+                  type="button"
+                  onClick={() => setShowDocument('privacy')}
+                  className="text-blue-600 hover:text-blue-800 hover:underline"
+                >
+                  политикой конфиденциальности
+                </button>
+              </label>
+            </div>
+          </div>
+
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 font-semibold"
@@ -246,6 +286,17 @@ export const TransferModal: React.FC<TransferModalProps> = ({
             <ArrowRight size={20} />
           </button>
         </form>
+
+        {/* Модальные окна для документов */}
+        {showDocument && (
+          <DocumentModal
+            isOpen={!!showDocument}
+            onClose={() => setShowDocument(null)}
+            title={documents[showDocument as keyof typeof documents].title}
+            content={documents[showDocument as keyof typeof documents].content}
+            fileName={documents[showDocument as keyof typeof documents].fileName}
+          />
+        )}
       </div>
     </div>
   );
