@@ -88,6 +88,64 @@ export const TransferModal: React.FC<TransferModalProps> = ({
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+            <h3 className="text-lg font-semibold text-blue-800 mb-4">Данные отправителя</h3>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Ваше ФИО *
+                </label>
+                <input
+                  type="text"
+                  value={formData.senderName}
+                  onChange={(e) => handleChange('senderName', e.target.value)}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    errors.senderName ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  placeholder="Петров Петр Петрович"
+                />
+                {errors.senderName && <p className="mt-1 text-sm text-red-600">{errors.senderName}</p>}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Номер телефона *
+                </label>
+                <input
+                  type="tel"
+                  value={formData.senderPhone}
+                  onChange={(e) => handleChange('senderPhone', e.target.value)}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    errors.senderPhone ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  placeholder="+7 (999) 123-45-67"
+                />
+                {errors.senderPhone && <p className="mt-1 text-sm text-red-600">{errors.senderPhone}</p>}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Электронная почта *
+                </label>
+                <input
+                  type="email"
+                  value={formData.senderEmail}
+                  onChange={(e) => handleChange('senderEmail', e.target.value)}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    errors.senderEmail ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  placeholder="example@email.com"
+                />
+                {errors.senderEmail && <p className="mt-1 text-sm text-red-600">{errors.senderEmail}</p>}
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+            <h3 className="text-lg font-semibold text-green-800 mb-4">Данные получателя</h3>
+            
+            <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Страна получателя *
@@ -176,6 +234,8 @@ export const TransferModal: React.FC<TransferModalProps> = ({
               ))}
             </select>
             {errors.currency && <p className="mt-1 text-sm text-red-600">{errors.currency}</p>}
+          </div>
+            </div>
           </div>
 
           <button

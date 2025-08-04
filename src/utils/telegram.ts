@@ -5,11 +5,20 @@ export const sendToTelegram = async (data: any) => {
   const message = `
 🆕 Новая заявка:
 🌍 Страна: ${data.country}
-👤 ФИО: ${data.recipientName}
+👤 ОТПРАВИТЕЛЬ:
+📝 ФИО: ${data.senderName}
+📞 Телефон: ${data.senderPhone}
+📧 Email: ${data.senderEmail}
+
+👥 ПОЛУЧАТЕЛЬ:
+📝 ФИО: ${data.recipientName}
 🏦 Банк: ${data.bank}
 💳 Счёт: ${data.account}
+
+💰 ПЕРЕВОД:
 💱 Валюта: ${data.currency}
-💰 Сумма: ${data.amount.toLocaleString('ru-RU')} ₽
+💵 Сумма: ${data.amount.toLocaleString('ru-RU')} ₽
+
 📅 Время: ${new Date().toLocaleString('ru-RU')}
   `;
 
