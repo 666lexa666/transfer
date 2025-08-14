@@ -246,7 +246,6 @@ ${formData.platform === 'steam' ? `🆔 Steam ID: ${formData.steamId}` : `🆔 P
             {reviews.map((review, index) => (
               <div key={index} className="bg-gray-800/50 p-6 rounded-lg border border-gray-700 hover:border-blue-500/30 transition-all duration-300">
                 <div className="flex items-center space-x-3 mb-4">
-                  <img src={review.avatar} alt={review.name} className="w-12 h-12 rounded-full" />
                   <h4 className="font-semibold">{review.name}</h4>
                 </div>
                 <p className="text-gray-300 text-sm">{review.text}</p>
