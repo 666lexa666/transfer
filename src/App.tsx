@@ -72,10 +72,12 @@ ${formData.platform === 'steam' ? `🆔 Steam ID: ${formData.steamId}` : `🆔 P
     e.preventDefault();
     sendToTelegram();
   };
+  
   const openDocModal = (docType: string) => {
     setCurrentDoc(docType);
     setShowDocModal(true);
   };
+
   useEffect(() => {
     if (showOrderModal || showDocModal || showPaymentModal) {
       document.body.style.overflow = 'hidden';
