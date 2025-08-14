@@ -92,23 +92,19 @@ ${formData.platform === 'steam' ? `🆔 Steam ID: ${formData.steamId}` : `🆔 P
   const reviews = [
     {
       name: "Алексей К.",
-      text: "Быстро пополнил Steam, без проблем. Комиссия минимальная, рекомендую!",
-      avatar: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop"
+      text: "Быстро пополнил Steam, без проблем. Комиссия минимальная, рекомендую!"
     },
     {
       name: "Мария В.",
-      text: "Пополняла PUBG Mobile, всё прошло моментально. Очень удобно!",
-      avatar: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop"
+      text: "Пополняла PUBG Mobile, всё прошло моментально. Очень удобно!"
     },
     {
       name: "Дмитрий С.",
-      text: "Пользуюсь регулярно, никогда не подводили. Отличный сервис!",
-      avatar: "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop"
+      text: "Пользуюсь регулярно, никогда не подводили. Отличный сервис!"
     },
     {
       name: "Анна Л.",
-      text: "Самые низкие комиссии из всех, что видела. Спасибо за качественный сервис!",
-      avatar: "https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop"
+      text: "Самые низкие комиссии из всех, что видела. Спасибо за качественный сервис!"
     }
   ];
 
